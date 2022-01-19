@@ -1,0 +1,88 @@
+/**estilos do formulario de login**/
+main{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-image: url('../image/bg-main.jpg');
+	background-position: center;
+	background-size: cover;	
+	height: 100vh;
+}
+.brand-area{
+	color: #fff;
+	width: 450px;
+	padding: 3px;
+}
+.brand-area h1{
+	
+	text-transform: uppercase;
+	text-shadow: 0em 0.1em 0.1em #222;
+	font-size: 50px;
+	font-family: 'Lato', sans-serif;
+	
+}
+.brand-area h1 .material-icons{
+	font-size: 60px;
+}
+.brand-area p{
+	margin-top: 20px;
+	font-size: 20px;
+	font-family: 'Lato', sans-serif;
+	text-shadow: 0em 0.1em 0.1em #222;
+}
+.login-area {
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	background-color: #fff;
+	border-radius: 5px;
+	width: 600px;
+	color: #000;
+	min-height: 300px;
+	background-color: rgba(255,255,255,0.8);
+	box-shadow: 0em 0em 0.3em #000;	
+	
+}
+
+.login-area .form-input{
+	display: flex;
+	color: #888;
+	flex-direction: column;
+	margin-top: 20px
+}
+.login-area .form-input input{
+	padding: 5px;
+	border-bottom: 1px solid #888;
+	width: 400px;
+	background-color: transparent;
+	outline: none;
+}
+.login-area .form-input .botton:focus{
+	border-bottom: 1px solid var(--color-blue-medium);
+	transition: border-bottom 0.8s linear;
+}
+.login-area .form-inpput .botton[type='submit']{
+	padding: 10px;
+	background: var(--bg-blue);
+	font-size: 20px;
+	color: #fff;
+	border-radius: 5px;
+	box-shadow: 0em 0em 0.1em #000;	
+	
+}
+.login-area .form-input .botton[type='submit']:hover{
+	box-shadow: 0em 0em 0.5em var(--color-blue-medium);	
+}
+.login-area a{
+	display: inline-block;
+	margin-top: 10px;
+	margin-right: 25px;
+	text-decoration: none;
+	font-size: 13px;
+	color: var(--color-blue-medium);
+}
+.login-area a:hover{
+	color: var(--color-blue);	
+}

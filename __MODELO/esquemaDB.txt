@@ -1,0 +1,55 @@
+ESQUEMA DO BANCO DE DADOS
+
+banco: estoque
+
+tabelas:
+	--users
+		-id
+		-name
+		-email
+		-password
+		-token
+		-type
+
+	--products
+		-id
+		-smallDesc
+		-longDesc
+		-price
+		-id_provider
+		-fk_provider_product
+		-id_user
+		-fk_user_product
+		-qty
+		-qty_min
+		-url_image
+		-included_at
+
+	--providers
+		-name
+		-type
+		-id_user
+		-fk_user_provider
+		-cnpj
+		-cpf
+		-address   
+		-phone
+		-email
+
+	--exits
+		-id
+		-id_user
+		-fk_user_exit
+		-id_product
+		-fk_product_exit
+		-date_exit 
+		-time_exit	
+	
+	--entries
+		-id
+		-id_user
+		-fk_user_entry
+		-id_product
+		-fk_product_entry
+		-date_entry 
+		-time_entry	

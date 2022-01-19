@@ -1,0 +1,12 @@
+{
+    "require": {
+        "clancats/hydrahon": "^1.1",
+        "phpdocumentor/phpdocumentor": "dev-develop"
+    },
+    "autoload": {
+        "psr-4": {
+            "core\\": "core/",
+            "src\\": "src/"
+        }
+    }
+}
