@@ -138,10 +138,13 @@ body{
 	width: 200px;
 }
 .user-area{
-	margin-left: 50px;
+	display: flex;
+	align-items: center;
+	margin-left: 20px;
 }
 .user-area .material-icons-outlined{
 	font-size: 40px;
+	margin-right: 10px;
 }
 
 

@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Controle estoque</title>
+		<title>Easy Stock | <?=$page;?></title>
 		<link rel="stylesheet" type="text/css" href="<?=$base;?>/assets/css/style.css">
 		<link rel="stylesheet" type="text/css" href="<?=$base;?>/assets/css/home.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -27,6 +27,7 @@
 					</form>
 					<div class="user-area">
 						<span class="material-icons-outlined">account_circle</span>
+						<p><?=$user->name;?></p>
 					</div>
 				</div>
 			</div>

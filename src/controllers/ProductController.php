@@ -4,7 +4,7 @@ namespace src\controllers;
 use \core\Controller;
 use \src\handlers\LoginHandler;
 
-class HomeController extends Controller {
+class ProductController extends Controller {
 
     private $loggedUser;
 
@@ -18,10 +18,12 @@ class HomeController extends Controller {
         }
     }
 
-    public function index() {
-        $this->render('home', [
+    public function new() {
+        $this->render('/products/create', [
                 'loggedUser' => $this->loggedUser,
-                'page' => 'Home'
-        ]);
+                'page' => 'Cadastro'
+            ]
+        );
     }
+
 }
