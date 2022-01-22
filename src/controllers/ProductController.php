@@ -4,6 +4,7 @@ namespace src\controllers;
 use \core\Controller;
 use \src\handlers\LoginHandler;
 use \src\handlers\ProductHandler;
+use \src\handlers\ProviderHandler;
 
 class ProductController extends Controller {
 
@@ -19,6 +20,9 @@ class ProductController extends Controller {
         }
     }
 
+    /**
+     * renderiza view com os fornecedres e menssagens
+     * **/
     public function new() {
         
         $flash = '';
@@ -28,10 +32,13 @@ class ProductController extends Controller {
              $_SESSION['flash'] = '';    
          }
 
+        $providers = ProviderHandler::allProviders();
+
         $this->render('/products/create', [
                 'loggedUser' => $this->loggedUser,
                 'page' => 'Cadastro',
-                'flash' => $flash
+                'flash' => $flash,
+                'providers' => $providers
             ]
         );
     }
@@ -42,18 +49,18 @@ class ProductController extends Controller {
         $price = filter_input(INPUT_POST, 'price');
         $qtd = filter_input(INPUT_POST, 'qtd', FILTER_SANITIZE_NUMBER_INT);
         $qtdMin = filter_input(INPUT_POST, 'qtd_min', FILTER_SANITIZE_NUMBER_INT);
-        $forn = filter_input(INPUT_POST, 'forn', FILTER_SANITIZE_NUMBER_INT);
+        $provider = filter_input(INPUT_POST, 'provider', FILTER_SANITIZE_NUMBER_INT);
         $longDesc = filter_input(INPUT_POST, 'long_desc', FILTER_SANITIZE_SPECIAL_CHARS);
         $idUser = $this->loggedUser->id;
 
-        if($smallDesc && $price && $qtd && $qtdMin && $forn){
+        if($smallDesc && $price && $qtd && $qtdMin && $provider){
 
             $res = ProductHandler::addProduct(
                 $smallDesc, 
                 $price,
                 $qtd,
                 $qtdMin,
-                $forn,
+                $provider,
                 $longDesc,
                 $idUser
             );

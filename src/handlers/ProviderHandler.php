@@ -7,22 +7,12 @@ use \src\models\Provider;
  */
 class ProviderHandler
 {
-	public static function addProduct($smallDesc, $price, $qtd, $qtdMin, $forn, $longDesc, $idUser)
+	public static function allProviders()
 	{
-		if(!empty($idUser)){
-			Product::insert([
-				'small_desc' => $smallDesc,
-				'long_desc' => $longDesc,
-				'price' => $price,
-				'id_provider' => $forn,
-				'id_user' => $idUser,
-				'qty' => $qtd,
-				'qty_min' => $qtdMin,
-				'included_at' => date('Y-m-d H:i:s'),
-				'url_image' => 'default.jpg'
-			])->execute();
+		$data = Provider::select()->get();
 
-			return true;
+		if(count($data)){
+			return $data;
 		}
 	}
 }

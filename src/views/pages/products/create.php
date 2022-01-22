@@ -31,11 +31,11 @@
 
 
 			<div class="form-control">
-				<label for="fron">Fornecedor</label>
-				<select id="forn" name="forn">
-					<option value="1">Multilaser</option>
-					<option value="2">Quality</option>
-					<option value="3">Fortlev</option>
+				<label for="provider">Fornecedor</label>
+				<select id="provider" name="provider">
+					<?php foreach($providers as $provider): ?>
+						<option value="<?=$provider['id']?>"><?=$provider['name'];?></option>
+					<?php endforeach; ?>
 				</select>
 			</div>
 
