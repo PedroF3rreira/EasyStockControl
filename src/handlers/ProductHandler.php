@@ -20,21 +20,27 @@ class ProductHandler
 	{
 		if(!empty($idUser)){
 
-			date_default_timezone_set('America/Sao_Paulo');
+			try {
+				date_default_timezone_set('America/Sao_Paulo');
 
-			Product::insert([
-				'small_desc' => $smallDesc,
-				'long_desc' => $longDesc,
-				'price' => $price,
-				'id_provider' => $provider,
-				'id_user' => $idUser,
-				'qty' => $qtd,
-				'qty_min' => $qtdMin,
-				'included_at' => date('Y-m-d H:i:s'),
-				'url_image' => 'default.jpg'
+				Product::insert([
+					'small_desc' => $smallDesc,
+					'long_desc' => $longDesc,
+					'price' => $price,
+					'id_provider' => $provider,
+					'id_user' => $idUser,
+					'qty' => $qtd,
+					'qty_min' => $qtdMin,
+					'included_at' => date('Y-m-d H:i:s'),
+					'url_image' => 'default.jpg'
 			])->execute();
 
-			return true;
+			return true;	
+			
+			} catch (PDOException $e) {
+				echo "erro ".$e->getMessage();
+			}
+			
 		}
 		else{
 			return false;
