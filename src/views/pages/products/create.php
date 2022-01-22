@@ -6,14 +6,18 @@
 			<h4>Cadastro de Produtos</h4>
 		</div>
 
-		<form method="POST" class="form">
-
+		<form method="POST" class="form" action="<?=$base;?>/produto/cadastro">
+			<?php if(!empty($flash)):?>
+				<div class="menssage">
+					<?=$flash;?>
+				</div>
+			<?php endif; ?>
 			<div class="form-control">
 				<label for="small_desc">Descrição</label>
 				<input type="text" name="small_desc" id="small_desc" required>
 
 				<label for="price">Preço</label>
-				<input type="text" name="price" id="price" required>
+				<input type="number" name="price" id="price" min="1" step="0.01" required>
 			</div>
 
 

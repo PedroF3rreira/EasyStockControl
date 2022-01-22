@@ -219,9 +219,10 @@ td{
 }
 
 .menssage{
-	background-color: rgba(255,0,0,0.5);
+	background-color: rgba(0,255,0,0.5);
 	color: #333;
 	padding: 10px;
 	border-radius: 5px;
 	text-align: center;
+	margin-bottom: 10px;
 }

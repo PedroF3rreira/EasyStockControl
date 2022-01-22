@@ -1,11 +1,11 @@
 <?php
 namespace src\handlers; 
 
-use \src\models\Product;
+use \src\models\Provider;
 /**
  * Classe responsavel por manipular produdos no banco de dados 
  */
-class ProductHandler
+class ProviderHandler
 {
 	public static function addProduct($smallDesc, $price, $qtd, $qtdMin, $forn, $longDesc, $idUser)
 	{
@@ -23,9 +23,6 @@ class ProductHandler
 			])->execute();
 
 			return true;
-		}
-		else{
-			return false;
 		}
 	}
 }
