@@ -1,4 +1,8 @@
-<?php $render('header', ['user' => $loggedUser, 'page' => $page]); ?>
+<?php $render('header', [
+	'user' => $loggedUser, 
+	'page' => $page
+]); ?>
+
 <div class="container-areas">
 
 	<section class="register content-area1">	
@@ -7,11 +11,18 @@
 		</div>
 
 		<form method="POST" class="form" action="<?=$base;?>/produto/cadastro">
+			
 			<?php if(!empty($flash)):?>
-				<div class="menssage">
+				<div class="flash">
 					<?=$flash;?>
 				</div>
 			<?php endif; ?>
+			<?php if(!empty($msg)):?>
+				<div class="menssage">
+					<?=$msg;?>
+				</div>
+			<?php endif;?>
+
 			<div class="form-control">
 				<label for="small_desc">Descrição</label>
 				<input type="text" name="small_desc" id="small_desc" required>

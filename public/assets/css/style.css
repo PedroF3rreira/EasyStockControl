@@ -226,3 +226,11 @@ td{
 	text-align: center;
 	margin-bottom: 10px;
 }
+.flash{
+	background-color: rgba(255,0,0,0.5);
+	color: #333;
+	padding: 10px;
+	border-radius: 5px;
+	text-align: center;
+	margin-bottom: 10px;	
+}

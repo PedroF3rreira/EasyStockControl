@@ -26,10 +26,15 @@ class ProductController extends Controller {
     public function new() {
         
         $flash = '';
+        $msg = '';
 
         if(!empty($_SESSION['flash'])){
-             $flash = $_SESSION['flash']; 
-             $_SESSION['flash'] = '';    
+             $flash = $_SESSION['flash'];
+             $_SESSION['flash'] = '';  
+         }
+         if (!empty($_SESSION['msg'])) {
+             $msg = $_SESSION['msg'];
+             $_SESSION['msg'] = '';   
          }
 
         $providers = ProviderHandler::allProviders();
@@ -38,7 +43,8 @@ class ProductController extends Controller {
                 'loggedUser' => $this->loggedUser,
                 'page' => 'Cadastro',
                 'flash' => $flash,
-                'providers' => $providers
+                'providers' => $providers,
+                'msg' => $msg
             ]
         );
     }
@@ -66,7 +72,7 @@ class ProductController extends Controller {
             );
 
             if($res){
-                $_SESSION['flash'] = 'Produto cadastrado com suscesso';
+                $_SESSION['msg'] = 'Produto cadastrado com sucesso!';
                 $this->redirect('/produto/cadastro');
             }
         }

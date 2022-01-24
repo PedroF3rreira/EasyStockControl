@@ -18,7 +18,7 @@
 			<div class="login-form">
 				<form  method="POST" action="<?=$base;?>/login">
 					<?php if(!empty($flash)):?>
-						<div class="menssage">
+						<div class="flash">
 							<?=$flash;?>
 						</div>
 					<?php endif; ?>

@@ -100,7 +100,7 @@
 
 
 		<div class="graphics-area">
-			<h2>Graficos</h2>
+			<h2>Gráficos</h2>
 			<br>
 			<br>
 			<br>
