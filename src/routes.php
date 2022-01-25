@@ -15,3 +15,4 @@ $router->get('/produto/cadastro', 'ProductController@new');
 $router->post('/produto/cadastro', 'ProductController@newAction');
 
 $router->get('/fornecedor/cadastro', 'ProviderController@newProvider');
+$router->post('/fornecedor/cadastro', 'ProviderController@newProviderAction');

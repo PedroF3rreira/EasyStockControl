@@ -28,4 +28,33 @@ class ProviderHandler
 
 		return $providers;
 	}
+
+	public function addProvider($name, $email, $type, $cpf, $cnpj, $phone, $address, $idUser)
+	{
+		if(!empty($idUser)){
+
+			try {
+
+				Provider::insert([
+					'name' => $name,
+					'type' => $type,
+					'cnpj' => $cnpj,
+					'cpf' => $cpf,
+					'address' => $address,
+					'phone' => $phone,
+					'email' => $email,
+					'id_user' => $idUser
+				])->execute();
+
+				return true;	
+
+			} catch (PDOException $e) {
+				echo "erro ".$e->getMessage();
+			}
+			
+		}
+		else{
+			return false;
+		}
+	}
 }
