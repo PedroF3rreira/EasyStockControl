@@ -43,7 +43,7 @@
 				<input type="text" name="cpf" id="cpf" placeholder="000.000.000-00" required>	
 
 				<label for="cnpj">Cnpj</label>
-				<input type="text" name="cnpj" id="cnpj" placeholder="00.000.000/0001-00"  style="background-color:rgba(0,0,0,.2);">
+				<input type="text" name="cnpj" id="cnpj" placeholder="00.000.000/0001-00" disabled style="background-color:rgba(0,0,0,.2);">
 			</div>
 			<div class="form-control">
 				<label for="phone">Telefone</label>
@@ -84,13 +84,13 @@
 			type = e.target.options[e.target.selectedIndex].value;
 
 			if(type == 0){
-				
-				
+				document.getElementById('cnpj').setAttribute('disabled',true);
+				document.getElementById('cnpj').setAttribute('required',true);
 				document.getElementById('cnpj').style = 'background-color: rgba(0,0,0,.2)';
 			}
 			else{
-				
-					
+				document.getElementById('cnpj').removeAttribute('disabled',true);
+				document.getElementById('cnpj').removeAttribute('required',true);	
 				document.getElementById('cnpj').style = 'background-color: #fff';
 			}
 		});
