@@ -2,7 +2,7 @@
 namespace src;
 
 class Config {
-    const BASE_DIR = '/easyEstockControl/public';
+    const BASE_DIR = '/easyStockControl/public';
 
     const DB_DRIVER = 'mysql';
     const DB_HOST = 'localhost';

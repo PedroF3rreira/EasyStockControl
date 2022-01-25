@@ -7,12 +7,25 @@ use \src\models\Provider;
  */
 class ProviderHandler
 {
+	/**
+	 * @return Provider
+	**/
 	public static function allProviders()
 	{
-		$data = Provider::select()->get();
+		//forma correta de enviar uma lista para um view
+		$providers = [];
 
-		if(count($data)){
-			return $data;
+		$providerList = Provider::select()->get();
+
+		foreach($providerList as $providerItem){
+			$provider = new Provider();
+
+			$provider->id = $providerItem['id'];
+			$provider->name = $providerItem['name'];
+
+			$providers[] = $provider;
 		}
+
+		return $providers;
 	}
 }

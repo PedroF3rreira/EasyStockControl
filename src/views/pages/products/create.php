@@ -34,7 +34,7 @@
 
 			<div class="form-control">
 				<label for="qtd">Qtd</label>
-				<input type="number" name="qtd" id="qtd" min="1" required>
+				<input type="number" name="qtd" id="qtd" min="1" >
 
 				<label for="qtd_min">Qtd mínima</label>
 				<input type="number" name="qtd_min" id="qtd_min" min="1" required>
@@ -45,7 +45,7 @@
 				<label for="provider">Fornecedor</label>
 				<select id="provider" name="provider">
 					<?php foreach($providers as $provider): ?>
-						<option value="<?=$provider['id']?>"><?=$provider['name'];?></option>
+						<option value="<?=$provider->id?>"><?=$provider->name;?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>
