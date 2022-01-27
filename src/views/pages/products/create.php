@@ -59,5 +59,5 @@
 			</div>
 		</form>
 	</section>
-	<?php $render('aside');  ?>
+	<?php $render('aside',['page' => $page]);  ?>
 	<?php $render('footer'); ?>

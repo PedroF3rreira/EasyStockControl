@@ -37,11 +37,11 @@ class ProductController extends Controller {
              $_SESSION['msg'] = '';   
          }
 
-        $providers = ProviderHandler::allProviders();
+         $providers = ProviderHandler::allProviders();
 
         $this->render('/products/create', [
                 'loggedUser' => $this->loggedUser,
-                'page' => 'Cadastro',
+                'page' => 'register',
                 'flash' => $flash,
                 'providers' => $providers,
                 'msg' => $msg
@@ -82,4 +82,217 @@ class ProductController extends Controller {
         }
     }
 
+    public function entryProduct()
+    {
+        $flash = '';
+        $msg = '';
+
+        if(!empty($_SESSION['flash'])){
+             $flash = $_SESSION['flash'];
+             $_SESSION['flash'] = '';  
+         }
+         if (!empty($_SESSION['msg'])) {
+             $msg = $_SESSION['msg'];
+             $_SESSION['msg'] = '';   
+         }
+
+        $providers = ProviderHandler::allProviders();
+
+        $this->render('/products/entry', [
+                'loggedUser' => $this->loggedUser,
+                'page' => 'Entrada de produtos',
+                'flash' => $flash,
+                'msg' => $msg
+            ]
+        ); 
+    }
+
+    /**
+     * controla processo de entrada de produtos
+     * **/
+
+     public function entryProductP($args)
+    {
+        $flash = '';
+        $msg = '';
+        $product = null;
+
+        if(!empty($_SESSION['flash'])){
+             $flash = $_SESSION['flash'];
+             $_SESSION['flash'] = '';  
+         }
+         if (!empty($_SESSION['msg'])) {
+             $msg = $_SESSION['msg'];
+             $_SESSION['msg'] = '';   
+         }
+
+        $product = ProductHandler::searchProductById($args['id']);
+
+        $this->render('/products/entry', [
+                'loggedUser' => $this->loggedUser,
+                'page' => 'Entrada de produtos',
+                'flash' => $flash,
+                'msg' => $msg,
+                'product' => $product
+            ]
+        ); 
+    }
+
+    public function entryProductAction()
+    {   
+        $productId = null;
+
+        $search = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
+        
+        if($search){
+            $productId = ProductHandler::productExists($search);
+        }
+
+        if($productId){
+            $this->redirect("/produto/entrada/$productId");
+        }
+        else{
+            $_SESSION['flash'] = 'Produto não encontrado';
+            $this->redirect('/produto/entrada');
+        } 
+    }
+    public function entryProductActionP($args)
+    {
+        $id = $args['id'];
+        $entry = filter_input(INPUT_POST, 'entry',FILTER_SANITIZE_NUMBER_INT);
+        $qty = filter_input(INPUT_POST, 'qty', FILTER_SANITIZE_NUMBER_INT);
+
+        if($entry > 0){
+            $res = ProductHandler::productQtyEntry($id, $qty, $entry);
+
+            if($res){
+                $_SESSION['msg'] = 'Entrada realizada com sucesso!';
+                $this->redirect('/produto/entrada');
+            }
+            else{
+             $_SESSION['flash'] = 'Um erro correu entre em contato com desenvolvedor:(';
+             $this->redirect('/produto/entrada');   
+            }
+         }
+         else{
+            $_SESSION['flash'] = 'Quantidade da entrada têm de ser maior que 0';
+            $this->redirect('/produto/entrada');        
+        }
+        /*
+        verificaçao que não permite numeros negativos
+        usada em volta dos outros ifs
+        if($qty > -1){
+            }
+        else{
+           $_SESSION['flash'] = 'Dados não estão preenchidos corretamente';
+           $this->redirect('/produto/entrada');   
+         }*/ 
+        
+    }
+
+    /**
+     * Controla processo de baixa em produtos
+     * */
+
+     public function exitProduct()
+    {
+        $flash = '';
+        $msg = '';
+
+        if(!empty($_SESSION['flash'])){
+             $flash = $_SESSION['flash'];
+             $_SESSION['flash'] = '';  
+         }
+         if (!empty($_SESSION['msg'])) {
+             $msg = $_SESSION['msg'];
+             $_SESSION['msg'] = '';   
+         }
+
+        $providers = ProviderHandler::allProviders();
+
+        $this->render('/products/exit', [
+                'loggedUser' => $this->loggedUser,
+                'page' => 'Saída de produtos',
+                'flash' => $flash,
+                'msg' => $msg
+            ]
+        ); 
+    }
+
+     public function exitProductP($args)
+    {
+        $flash = '';
+        $msg = '';
+        $product = null;
+
+        if(!empty($_SESSION['flash'])){
+             $flash = $_SESSION['flash'];
+             $_SESSION['flash'] = '';  
+         }
+         if (!empty($_SESSION['msg'])) {
+             $msg = $_SESSION['msg'];
+             $_SESSION['msg'] = '';   
+         }
+
+        $product = ProductHandler::searchProductById($args['id']);
+
+        $this->render('/products/exit', [
+                'loggedUser' => $this->loggedUser,
+                'page' => 'Saída de produtos',
+                'flash' => $flash,
+                'msg' => $msg,
+                'product' => $product
+            ]
+        ); 
+    }
+
+    public function exitProductAction()
+    {   
+        $productId = null;
+
+        $search = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
+        
+        if($search){
+            $productId = ProductHandler::productExists($search);
+        }
+
+        if($productId){
+            $this->redirect("/produto/saida/$productId");
+        }
+        else{
+            $_SESSION['flash'] = 'Produto não encontrado';
+            $this->redirect('/produto/saida');
+        } 
+    }
+    public function exitProductActionP($args)
+    {
+        $id = $args['id'];
+
+        $exit = filter_input(INPUT_POST, 'exit',FILTER_SANITIZE_NUMBER_INT);
+        $qty = filter_input(INPUT_POST, 'qty', FILTER_SANITIZE_NUMBER_INT);
+
+        if($qty){
+            if($exit){
+                
+                $res = ProductHandler::productQtyExit($id, $qty, $exit);
+
+                if($res){
+                    $_SESSION['msg'] = 'Saída realizada com sucesso!';
+                    $this->redirect('/produto/saida');
+                }
+                else{
+                   $_SESSION['flash'] = 'Um erro correu entre em contato com desenvolvedor:(';
+                   $this->redirect('/produto/saida');   
+               }
+           }
+           else{
+                $_SESSION['flash'] = 'Saída Têm de ser maior que 0';
+                $this->redirect('/produto/saida');        
+            }
+        }
+        else{
+           $_SESSION['flash'] = 'Quantidade Têm de ser maior que 0';
+           $this->redirect('/produto/saida');   
+       }   
+    }
 }

@@ -111,7 +111,7 @@
 			<br>
 		</div>
 	</section>
-	<?php $render('aside'); ?>
+	<?php $render('aside',['page' => $page]); ?>
 </div>
 </body>
 </html>

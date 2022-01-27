@@ -19,12 +19,6 @@
 					</div>
 				</div>
 				<div class="header-right">
-					<form class="search">
-						<div>
-							<label>Busca</label>
-							<input type="search" name="search" placeholder="digite um codigo ou produto">
-						</div>
-					</form>
 					<div class="user-area">
 						<span class="material-icons-outlined">account_circle</span>
 						<p><?=$user->name;?></p>
