@@ -3,6 +3,7 @@ namespace src\controllers;
 
 use \core\Controller;
 use \src\handlers\LoginHandler;
+use \src\handlers\EntryHandler;
 
 class HomeController extends Controller {
 
@@ -19,9 +20,14 @@ class HomeController extends Controller {
     }
 
     public function index() {
+
+        $entries = EntryHandler::getLastEntries();
+        
         $this->render('home', [
                 'loggedUser' => $this->loggedUser,
-                'page' => 'home'
+                'page' => 'home',
+                'entries' => $entries
+
         ]);
     }
 }

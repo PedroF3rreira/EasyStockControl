@@ -202,20 +202,28 @@ table{
 	width: 100%;
 	margin-top: 30px;
 	background-color: #FFF;
-	border-radius: 5px;
 	border-collapse: collapse;
 }
 th{
 	background: var(--color-blue-medium);
 	color: #fff;
 }
-table, tr, td, th{
+table{
 	border: 1px solid rgba(0,0,0,.2);
-	padding: 10px;
-
+}
+th,td{
+	border-right: 1px solid rgba(0,0,0,.3);
+	border-bottom: 1px solid rgba(0,0,0,.3);
+	padding: 5px;
 }
 td{
-	text-align: center;
+	padding-left: 15px;
+	font-size: 13px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+tr:hover{
+	background-color: rgba(0,0,0,.2);;
 }
 
 .menssage{

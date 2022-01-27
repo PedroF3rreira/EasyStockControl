@@ -5,6 +5,8 @@ use \core\Controller;
 use \src\handlers\LoginHandler;
 use \src\handlers\ProductHandler;
 use \src\handlers\ProviderHandler;
+use \src\handlers\EntryHandler;
+use \src\handlers\ExitHandler;
 
 class ProductController extends Controller {
 
@@ -107,7 +109,26 @@ class ProductController extends Controller {
         ); 
     }
 
-    /**
+    public function entryProductAction()
+    {   
+        $productId = null;
+
+        $search = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
+        
+        if($search){
+            $productId = ProductHandler::productExists($search);
+        }
+
+        if($productId){
+            $this->redirect("/produto/entrada/$productId");
+        }
+        else{
+            $_SESSION['flash'] = 'Produto não encontrado';
+            $this->redirect('/produto/entrada');
+        } 
+    }
+
+     /**
      * controla processo de entrada de produtos
      * **/
 
@@ -138,24 +159,7 @@ class ProductController extends Controller {
         ); 
     }
 
-    public function entryProductAction()
-    {   
-        $productId = null;
 
-        $search = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
-        
-        if($search){
-            $productId = ProductHandler::productExists($search);
-        }
-
-        if($productId){
-            $this->redirect("/produto/entrada/$productId");
-        }
-        else{
-            $_SESSION['flash'] = 'Produto não encontrado';
-            $this->redirect('/produto/entrada');
-        } 
-    }
     public function entryProductActionP($args)
     {
         $id = $args['id'];
@@ -164,6 +168,7 @@ class ProductController extends Controller {
 
         if($entry > 0){
             $res = ProductHandler::productQtyEntry($id, $qty, $entry);
+            EntryHandler::addEntry($this->loggedUser->id, $id, $qty, $entry);
 
             if($res){
                 $_SESSION['msg'] = 'Entrada realizada com sucesso!';
@@ -275,6 +280,7 @@ class ProductController extends Controller {
             if($exit){
                 
                 $res = ProductHandler::productQtyExit($id, $qty, $exit);
+                ExitHandler::addExit($this->loggedUser->id, $id, $qty, $exit);
 
                 if($res){
                     $_SESSION['msg'] = 'Saída realizada com sucesso!';

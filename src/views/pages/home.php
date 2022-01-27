@@ -5,90 +5,47 @@
 	<section class="content-area1">
 		
 		<div class="section-title">
-			<h4>Últimas Saídas</h4>
+			<h4>Últimas Entradas</h4>
 		</div>
-		<section class="area-content last-exits">
-
-			<div class="card-area">
-				<div class="card-image">
-					<img src="assets/image/ventilador.jpg" alt="">
-				</div>
-				<div class="card-body">
-					texto do card				
-				</div>
-			</div>
-
-			<div class="card-area">
-				<div class="card-image">
-					<img src="assets/image/carro.jpg" alt="">
-				</div>
-				<div class="card-body">
-					texto do card				
-				</div>
-			</div>
-
-			<div class="card-area">
-				<div class="card-image">
-					<img src="assets/image/tinta-lux.jpg" alt="">
-				</div>
-				<div class="card-body">
-					texto do card				
-				</div>
-			</div>
-
-			<div class="card-area">
-				<div class="card-image">
-					<img src="assets/image/controle-remoto.jpg" alt="">
-				</div>
-				<div class="card-body">
-					texto do card				
-				</div>
-			</div>
-			
+		<section class="content-areas last-entries">
+			<table>
+				<tr>
+					<th>Código</th>
+					<th>Descrição</th>
+					<th>Quantidade</th>
+					<th>Qtd-Entrada</th>
+				</tr>
+				<tbody>
+					<?php foreach($entries as $entry): ?>
+						<tr>
+							<td><?=$entry->id;?></td>
+							<td><?=$entry->product->smallDesc;?></td>
+							<td><?=$entry->qty;?></td>
+							<td><?=$entry->entry;?></td>
+						</tr>
+					<?php endforeach;?>
+				</tbody>
+			</table>
 		</section>
 		
 		<div class="section-title">
-			<h4>Últimas entradas</h4>
+			<h4>Últimas Saídas</h4>
 		</div>
 
-		<section class="area-content last-entries">
-
-			<div class="card-area">
-				<div class="card-image">
-					<img src="assets/image/ventilador.jpg" alt="">
-				</div>
-				<div class="card-body">
-					texto do card				
-				</div>
-			</div>
-
-			<div class="card-area">
-				<div class="card-image">
-					<img src="assets/image/carro.jpg" alt="">
-				</div>
-				<div class="card-body">
-					texto do card				
-				</div>
-			</div>
-
-			<div class="card-area">
-				<div class="card-image">
-					<img src="assets/image/tinta-lux.jpg" alt="">
-				</div>
-				<div class="card-body">
-					texto do card				
-				</div>
-			</div>
-
-			<div class="card-area">
-				<div class="card-image">
-					<img src="assets/image/controle-remoto.jpg" alt="">
-				</div>
-				<div class="card-body">
-					texto do card				
-				</div>
-			</div>
-			
+		<section class="content-areas last-exits">
+			<table>
+				<tr>
+					<th>Código</th>
+					<th>Descrição</th>
+					<th>Saldo anterior</th>
+					<th>Qtd-Entrada</th>
+					<th>Fornecedor</th>
+				</tr>
+				<tbody>
+					
+				</tbody>
+			</table>
+						
 		</section>
 	</section>
 
