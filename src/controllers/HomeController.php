@@ -4,6 +4,7 @@ namespace src\controllers;
 use \core\Controller;
 use \src\handlers\LoginHandler;
 use \src\handlers\EntryHandler;
+use \src\handlers\OutputHandler;
 
 class HomeController extends Controller {
 
@@ -22,12 +23,13 @@ class HomeController extends Controller {
     public function index() {
 
         $entries = EntryHandler::getLastEntries();
-        
+        $outputs = OutputHandler::getLastOutput();
+
         $this->render('home', [
                 'loggedUser' => $this->loggedUser,
                 'page' => 'home',
-                'entries' => $entries
-
+                'entries' => $entries,
+                'outputs' => $outputs
         ]);
     }
 }

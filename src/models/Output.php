@@ -2,6 +2,6 @@
 namespace src\models;
 use \core\Model;
 
-class Exit extends Model {
+class Output extends Model {
 
 }

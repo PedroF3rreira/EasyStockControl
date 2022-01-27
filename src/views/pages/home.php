@@ -39,10 +39,16 @@
 					<th>Descrição</th>
 					<th>Saldo anterior</th>
 					<th>Qtd-Entrada</th>
-					<th>Fornecedor</th>
 				</tr>
 				<tbody>
-					
+					<?php foreach($outputs as $output): ?>
+						<tr>
+							<td><?=$output->id;?></td>
+							<td><?=$output->product->smallDesc;?></td>
+							<td><?=$output->qty;?></td>
+							<td><?=$output->output;?></td>
+						</tr>
+					<?php endforeach;?>
 				</tbody>
 			</table>
 						

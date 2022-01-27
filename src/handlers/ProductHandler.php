@@ -136,7 +136,7 @@ class ProductHandler
 	 * @param int $qty
 	 * @param int $value
 	 * **/
-	public static function productQtyExit($id, $qty, $value)
+	public static function productQtyOutput($id, $qty, $value)
 	{
 		try {
 			//opcional verificaçao para não permitir dar saidas

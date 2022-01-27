@@ -19,10 +19,10 @@ $router->get('/produto/entrada/{id}', 'ProductController@entryProductP');
 $router->post('/produto/entrada', 'ProductController@entryProductAction');
 $router->post('/produto/entrada/{id}', 'ProductController@entryProductActionP');
 
-$router->get('/produto/saida', 'ProductController@exitProduct');
-$router->get('/produto/saida/{id}', 'ProductController@exitProductP');
-$router->post('/produto/saida', 'ProductController@exitProductAction');
-$router->post('/produto/saida/{id}', 'ProductController@exitProductActionP');
+$router->get('/produto/saida', 'ProductController@outputProduct');
+$router->get('/produto/saida/{id}', 'ProductController@outputProductP');
+$router->post('/produto/saida', 'ProductController@outputProductAction');
+$router->post('/produto/saida/{id}', 'ProductController@outputProductActionP');
 
 
 $router->get('/fornecedor/cadastro', 'ProviderController@newProvider');

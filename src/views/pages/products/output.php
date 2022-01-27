@@ -47,7 +47,7 @@
 
 			<div class="form-control">
 				<label>Qtd-Saída</label>
-				<input type="text" name="exit"  min="1" size="2" required>
+				<input type="text" name="output"  min="1" size="2" required>
 			</div>
 
 			<div class="form-control">

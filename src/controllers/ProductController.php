@@ -6,7 +6,7 @@ use \src\handlers\LoginHandler;
 use \src\handlers\ProductHandler;
 use \src\handlers\ProviderHandler;
 use \src\handlers\EntryHandler;
-use \src\handlers\ExitHandler;
+use \src\handlers\OutputHandler;
 
 class ProductController extends Controller {
 
@@ -23,7 +23,7 @@ class ProductController extends Controller {
     }
 
     /**
-     * renderiza view com os fornecedres e menssagens
+     * renderiza view com os fornecedores e menssagens
      * **/
     public function new() {
         
@@ -50,7 +50,10 @@ class ProductController extends Controller {
             ]
         );
     }
-
+    /**
+     * processa dados vindo do formulário
+     * e chama handle para tratar da inserção no banco de dados
+     * **/
     public function newAction()
     {
         $smallDesc = filter_input(INPUT_POST, 'small_desc', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -84,6 +87,10 @@ class ProductController extends Controller {
         }
     }
 
+    /**
+     * 
+     * 
+     * **/
     public function entryProduct()
     {
         $flash = '';
@@ -97,8 +104,6 @@ class ProductController extends Controller {
              $msg = $_SESSION['msg'];
              $_SESSION['msg'] = '';   
          }
-
-        $providers = ProviderHandler::allProviders();
 
         $this->render('/products/entry', [
                 'loggedUser' => $this->loggedUser,
@@ -199,7 +204,7 @@ class ProductController extends Controller {
      * Controla processo de baixa em produtos
      * */
 
-     public function exitProduct()
+     public function outputProduct()
     {
         $flash = '';
         $msg = '';
@@ -215,7 +220,7 @@ class ProductController extends Controller {
 
         $providers = ProviderHandler::allProviders();
 
-        $this->render('/products/exit', [
+        $this->render('/products/output', [
                 'loggedUser' => $this->loggedUser,
                 'page' => 'Saída de produtos',
                 'flash' => $flash,
@@ -224,7 +229,7 @@ class ProductController extends Controller {
         ); 
     }
 
-     public function exitProductP($args)
+     public function outputProductP($args)
     {
         $flash = '';
         $msg = '';
@@ -241,7 +246,7 @@ class ProductController extends Controller {
 
         $product = ProductHandler::searchProductById($args['id']);
 
-        $this->render('/products/exit', [
+        $this->render('/products/output', [
                 'loggedUser' => $this->loggedUser,
                 'page' => 'Saída de produtos',
                 'flash' => $flash,
@@ -251,7 +256,7 @@ class ProductController extends Controller {
         ); 
     }
 
-    public function exitProductAction()
+    public function outputProductAction()
     {   
         $productId = null;
 
@@ -269,18 +274,18 @@ class ProductController extends Controller {
             $this->redirect('/produto/saida');
         } 
     }
-    public function exitProductActionP($args)
+    public function outputProductActionP($args)
     {
         $id = $args['id'];
 
-        $exit = filter_input(INPUT_POST, 'exit',FILTER_SANITIZE_NUMBER_INT);
+        $output = filter_input(INPUT_POST, 'output',FILTER_SANITIZE_NUMBER_INT);
         $qty = filter_input(INPUT_POST, 'qty', FILTER_SANITIZE_NUMBER_INT);
 
         if($qty){
-            if($exit){
+            if($output){
                 
-                $res = ProductHandler::productQtyExit($id, $qty, $exit);
-                ExitHandler::addExit($this->loggedUser->id, $id, $qty, $exit);
+                $res = ProductHandler::productQtyOutput($id, $qty, $output);
+                OutputHandler::addOutput($this->loggedUser->id, $id, $qty, $output);
 
                 if($res){
                     $_SESSION['msg'] = 'Saída realizada com sucesso!';
