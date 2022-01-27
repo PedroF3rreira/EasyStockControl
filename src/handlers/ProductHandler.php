@@ -76,8 +76,8 @@ class ProductHandler
 	}
 
 	/**
-	 * pesquisa produto pelo id se encontrar retorn objeto Produto preenchido
-	 * senão encontrar retorna nulo
+	 * pesquisa produto pelo id, se encontrado algum resultado retorna objeto Produto preenchido
+	 * senão encontrado retorna nulo
 	 * @param int $id
 	 * @return object
 	 * */
