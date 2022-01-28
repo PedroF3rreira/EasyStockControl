@@ -38,7 +38,7 @@
 					<th>Código</th>
 					<th>Descrição</th>
 					<th>Saldo anterior</th>
-					<th>Qtd-Entrada</th>
+					<th>Qtd-Saída</th>
 				</tr>
 				<tbody>
 					<?php foreach($outputs as $output): ?>
