@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ac30facc6416d068f2ec2883c245b52",
+    "content-hash": "e225e54bba431b713c557f5b25fcc281",
     "packages": [
         {
             "name": "clancats/hydrahon",
@@ -52,6 +52,45 @@
                 "sqlite"
             ],
             "time": "2019-09-19T10:59:20+00:00"
+        },
+        {
+            "name": "davefx/phplot",
+            "version": "6.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davefx/PHPlot.git",
+                "reference": "d2e201ecaabb0428116c89cebe281a8f54096450"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davefx/PHPlot/zipball/d2e201ecaabb0428116c89cebe281a8f54096450",
+                "reference": "d2e201ecaabb0428116c89cebe281a8f54096450",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "phplot/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "description": "PHPlot - Create charts in PHP",
+            "homepage": "http://phplot.sourceforge.net",
+            "keywords": [
+                "chart",
+                "phplot"
+            ],
+            "support": {
+                "issues": "https://github.com/davefx/PHPlot/issues",
+                "source": "https://github.com/davefx/PHPlot/tree/master"
+            },
+            "time": "2016-10-19T07:14:15+00:00"
         }
     ],
     "packages-dev": [],
@@ -61,5 +100,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
 }

@@ -32,11 +32,11 @@ body{
 }	
 .content-area1{
 	grid-column: 2 / 6;
-	padding-left: 10px;
+	padding-left: 20px;
 }
 .content-area2{
 	grid-column:  6 / 9;
-	padding: 10px;
+	padding-left: 20px;
 		
 }
 
@@ -87,15 +87,12 @@ body{
 	background-color: var(--color-blue-secundary);
 }
 
-
-
 .section-title{
 	padding: 10px;
 	color: #444;
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-
 
 
 

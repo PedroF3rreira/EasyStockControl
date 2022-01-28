@@ -5,6 +5,7 @@ use \core\Controller;
 use \src\handlers\LoginHandler;
 use \src\handlers\EntryHandler;
 use \src\handlers\OutputHandler;
+use \src\handlers\GraphicHandler;
 
 class HomeController extends Controller {
 
@@ -24,7 +25,7 @@ class HomeController extends Controller {
 
         $entries = EntryHandler::getLastEntries();
         $outputs = OutputHandler::getLastOutput();
-
+        
         $this->render('home', [
                 'loggedUser' => $this->loggedUser,
                 'page' => 'home',

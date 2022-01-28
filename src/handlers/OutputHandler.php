@@ -54,8 +54,8 @@ class OutputHandler
 				$output->id = $outputItem['idOutput'];
 				$output->qty = $outputItem['qty'];
 				$output->output = $outputItem['output'];
-				$output->dateEntry = $outputItem['date_output'];
-				$output->timeEntry = $outputItem['time_output'];
+				$output->dateOutput = $outputItem['date_output'];
+				$output->timeOutput = $outputItem['time_output'];
 				
 				$output->product = new Product();
 				$output->product->smallDesc = $outputItem['small_desc'];

@@ -27,7 +27,12 @@
 
 /*******graphics-area********/
 .graphics-area{
+	display: flex;
+	justify-content: center;
 	box-shadow: var(--color-shadow);
 	background-color: #fff;
-	border-radius: 5px;
+	border-radius: 3px;
+	margin-right: 20px;
+	
 }
+
