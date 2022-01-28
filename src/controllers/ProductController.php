@@ -43,7 +43,7 @@ class ProductController extends Controller {
 
         $this->render('/products/create', [
                 'loggedUser' => $this->loggedUser,
-                'page' => 'register',
+                'page' => 'cadastro',
                 'flash' => $flash,
                 'providers' => $providers,
                 'msg' => $msg
@@ -107,7 +107,7 @@ class ProductController extends Controller {
 
         $this->render('/products/entry', [
                 'loggedUser' => $this->loggedUser,
-                'page' => 'Entrada de produtos',
+                'page' => 'entrada',
                 'flash' => $flash,
                 'msg' => $msg
             ]
@@ -156,7 +156,7 @@ class ProductController extends Controller {
 
         $this->render('/products/entry', [
                 'loggedUser' => $this->loggedUser,
-                'page' => 'Entrada de produtos',
+                'page' => 'entrada',
                 'flash' => $flash,
                 'msg' => $msg,
                 'product' => $product
@@ -222,7 +222,7 @@ class ProductController extends Controller {
 
         $this->render('/products/output', [
                 'loggedUser' => $this->loggedUser,
-                'page' => 'Saída de produtos',
+                'page' => 'saida',
                 'flash' => $flash,
                 'msg' => $msg
             ]
@@ -248,7 +248,7 @@ class ProductController extends Controller {
 
         $this->render('/products/output', [
                 'loggedUser' => $this->loggedUser,
-                'page' => 'Saída de produtos',
+                'page' => 'saida',
                 'flash' => $flash,
                 'msg' => $msg,
                 'product' => $product
