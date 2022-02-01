@@ -18,7 +18,7 @@
 				<tbody>
 					<?php foreach($entries as $entry): ?>
 						<tr>
-							<td><?=$entry->product->smallDesc;?></td>
+							<td><?=substr($entry->product->smallDesc, 0, 28).'...';?></td>
 							<td><?=$entry->qty;?></td>
 							<td><?=$entry->entry;?></td>
 							<td><?=date_format(date_create($entry->dateEntry), 'd-m-Y')?></td>
@@ -42,7 +42,7 @@
 				<tbody>
 					<?php foreach($outputs as $output): ?>
 						<tr>
-							<td><?=$output->product->smallDesc;?></td>
+							<td><?=substr($output->product->smallDesc, 0, 28).'...'?></td>
 							<td><?=$output->qty;?></td>
 							<td><?=$output->output;?></td>
 							<td><?=date_format(date_create($output->dateOutput), 'd-m-Y');?></td>

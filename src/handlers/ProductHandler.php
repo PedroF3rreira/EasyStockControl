@@ -94,7 +94,11 @@ class ProductHandler
 				$product = new Product();
 				$product->id = $data['id'];
 				$product->smallDesc = $data['small_desc'];
+				$product->longDesc = $data['long_desc'];
+				$product->price = $data['price'];
+				$product->qtyMin = $data['qty_min'];
 				$product->qty = $data['qty'];
+				$product->idProvider = $data['id_provider'];
 			}
 
 			return $product;
@@ -150,6 +154,27 @@ class ProductHandler
 
 			return true;
 			
+		} catch (PDOException $e) {
+			return false;
+		}
+	}
+
+	public static function setProduct($id, $smallDesc, $longDesc, $price, $qtyMin, $provider)
+	{
+		try {
+
+			Product::update()
+				->set([
+					'small_desc' => $smallDesc,
+					'long_desc' => $longDesc,
+					'price' => $price,
+					'qty_min' => $qtyMin,
+					'id_provider' => $provider
+				])
+				->where('id', $id)
+			->execute();
+			
+			return true;
 		} catch (PDOException $e) {
 			return false;
 		}

@@ -8,7 +8,7 @@
 
 		<li class='<?=($page=='saida'?'active':'') ?>'><a href="<?=$base;?>/produto/saida"><span class="material-icons-outlined">call_missed</span>Saídas</a></li>
 
-		<li class='<?=($page=='update'?'active':'') ?>'><a href="atualizar.html"><span class="material-icons-outlined">sync_alt</span>Alteração</a></li>
+		<li class='<?=($page=='alterar'?'active':'') ?>'><a href="<?=$base;?>/produto/alterar"><span class="material-icons-outlined">sync_alt</span>Alteração</a></li>
 
 		<li class='<?=($page=='register_provider'?'active':'') ?>'><a href="<?=$base;?>/fornecedor/cadastro"><span class="material-icons-outlined">face</span>Cadastro Fornecedores</a></li>
 

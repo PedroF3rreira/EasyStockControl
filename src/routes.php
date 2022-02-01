@@ -24,5 +24,10 @@ $router->get('/produto/saida', 'ProductController@outputProduct');
 $router->post('/produto/saida/{id}', 'ProductController@outputProductAction');
 $router->post('/produto/saida', 'ProductController@outputProductAction');
 
+$router->get('/produto/alterar/{id}', 'ProductController@updateProduct');
+$router->get('/produto/alterar', 'ProductController@updateProduct');
+$router->post('/produto/alterar/{id}', 'ProductController@updateProductAction');
+$router->post('/produto/alterar', 'ProductController@updateProductAction');
+
 $router->get('/fornecedor/cadastro', 'ProviderController@newProvider');
 $router->post('/fornecedor/cadastro', 'ProviderController@newProviderAction');

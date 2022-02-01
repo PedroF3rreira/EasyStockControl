@@ -98,6 +98,7 @@ class ProductController extends Controller {
     {
         $flash = '';
         $msg = '';
+        $product = [];
 
         if(!empty($_SESSION['flash'])){
              $flash = $_SESSION['flash'];
@@ -110,23 +111,15 @@ class ProductController extends Controller {
 
          if(!empty($args)){
             $product = ProductHandler::searchProductById($args['id']);
-
-            $this->render('/products/entry', [
-                'loggedUser' => $this->loggedUser,
-                'page' => 'entrada',
-                'flash' => $flash,
-                'msg' => $msg,
-                'product' => $product
-            ]); 
          }
 
-        $this->render('/products/entry', [
-                'loggedUser' => $this->loggedUser,
-                'page' => 'entrada',
-                'flash' => $flash,
-                'msg' => $msg
-            ]
-        ); 
+         $this->render('/products/entry', [
+            'loggedUser' => $this->loggedUser,
+            'page' => 'entrada',
+            'flash' => $flash,
+            'msg' => $msg,
+            'product' => $product
+        ]); 
     }
 
     public function entryProductAction($args)
@@ -201,6 +194,7 @@ class ProductController extends Controller {
      {
         $flash = '';
         $msg = '';
+        $product = [];
 
         if(!empty($_SESSION['flash'])){
              $flash = $_SESSION['flash'];
@@ -211,33 +205,23 @@ class ProductController extends Controller {
              $_SESSION['msg'] = '';   
          }
         if(!empty($args)){
-            
             $product = ProductHandler::searchProductById($args['id']);
-
-            $this->render('/products/output', [
-                'loggedUser' => $this->loggedUser,
-                'page' => 'saida',
-                'flash' => $flash,
-                'msg' => $msg,
-                'product' => $product
-            ]); 
         }
 
-        //se $args nâo estiver vazio
         $this->render('/products/output', [
-                'loggedUser' => $this->loggedUser,
-                'page' => 'saida',
-                'flash' => $flash,
-                'msg' => $msg
-            ]
-        ); 
+            'loggedUser' => $this->loggedUser,
+            'page' => 'saida',
+            'flash' => $flash,
+            'msg' => $msg,
+            'product' => $product
+        ]);  
     }
 
     public function outputProductAction($args = [])
     {   
         if(!empty($args)){
           
-          $id = $args['id'];
+            $id = $args['id'];
 
             $output = filter_input(INPUT_POST, 'output',FILTER_SANITIZE_NUMBER_INT);
             $qty = filter_input(INPUT_POST, 'qty', FILTER_SANITIZE_NUMBER_INT);
@@ -282,6 +266,95 @@ class ProductController extends Controller {
         else{
             $_SESSION['flash'] = 'Produto não encontrado';
             $this->redirect('/produto/saida');
+        } 
+    }
+
+
+    /**
+     * update
+     * 
+     * */
+     /**
+     * renderiza pagina de saída de produtos
+     * se rota não receber argumentos
+     * se receber renderiza mesma pagina mas preenchida 
+     * com dados vindos do banco e dados
+     *@param array $args 
+     * **/
+     public function updateProduct($args = [])
+     {
+        $flash = '';
+        $msg = '';
+        $product = [];
+
+        if(!empty($_SESSION['flash'])){
+             $flash = $_SESSION['flash'];
+             $_SESSION['flash'] = '';  
+         }
+         if (!empty($_SESSION['msg'])) {
+             $msg = $_SESSION['msg'];
+             $_SESSION['msg'] = '';   
+         }
+        if(!empty($args)){
+            $product = ProductHandler::searchProductById($args['id']);
+        }
+        
+        $providers = ProviderHandler::allProviders();
+        
+        $this->render('/products/update', [
+            'loggedUser' => $this->loggedUser,
+            'page' => 'alterar',
+            'flash' => $flash,
+            'msg' => $msg,
+            'product' => $product,
+            'providers' => $providers
+        ]);  
+    }
+
+    public function updateProductAction($args = [])
+    {   
+        if(!empty($args)){
+          
+          $id = $args['id'];
+
+            $smallDesc = filter_input(INPUT_POST, 'small_desc',FILTER_SANITIZE_SPECIAL_CHARS);
+            $longDesc = filter_input(INPUT_POST, 'long_desc',FILTER_SANITIZE_SPECIAL_CHARS);
+            $price = filter_input(INPUT_POST, 'price');
+            $qty_min = filter_input(INPUT_POST, 'qty_min', FILTER_SANITIZE_NUMBER_INT);
+            $provider = filter_input(INPUT_POST, 'provider', FILTER_SANITIZE_SPECIAL_CHARS);
+
+            if($id && $smallDesc && $provider){
+                $res = ProductHandler::setProduct($id, $smallDesc, $longDesc, $price, $qty_min, $provider);
+
+                if($res){
+                    $_SESSION['msg'] = 'Produto altualizado com suscesso!';
+                    $this->redirect('/produto/alterar');
+                }
+                else{
+                    $_SESSION['flash'] = 'Ocorreu um erro';
+                    $this->redirect('/produto/alterar');
+                }
+            }
+            else{
+                $_SESSION['flash'] = 'Dados não preenchidos!';
+                $this->redirect('/produto/alterar');
+            }
+        }
+
+        //se $args estiver vazio
+        $productId = null;
+        $search = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
+        
+        if($search){
+            $productId = ProductHandler::productExists($search);
+        }
+
+        if($productId){
+            $this->redirect("/produto/alterar/$productId");
+        }
+        else{
+            $_SESSION['flash'] = 'Produto não encontrado';
+            $this->redirect('/produto/alterar');
         } 
     }
 }
