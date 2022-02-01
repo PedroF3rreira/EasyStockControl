@@ -88,10 +88,13 @@ class ProductController extends Controller {
     }
 
     /**
-     * 
-     * 
+     * renderiza pagina de entrada de produtos
+     * se rota não receber argumentos
+     * se receber renderiza mesma pagina mas preenchida 
+     * com dados vindos do banco e dados
+     *@param array $args 
      * **/
-    public function entryProduct()
+    public function entryProduct($args = [])
     {
         $flash = '';
         $msg = '';
@@ -105,6 +108,18 @@ class ProductController extends Controller {
              $_SESSION['msg'] = '';   
          }
 
+         if(!empty($args)){
+            $product = ProductHandler::searchProductById($args['id']);
+
+            $this->render('/products/entry', [
+                'loggedUser' => $this->loggedUser,
+                'page' => 'entrada',
+                'flash' => $flash,
+                'msg' => $msg,
+                'product' => $product
+            ]); 
+         }
+
         $this->render('/products/entry', [
                 'loggedUser' => $this->loggedUser,
                 'page' => 'entrada',
@@ -114,8 +129,35 @@ class ProductController extends Controller {
         ); 
     }
 
-    public function entryProductAction()
+    public function entryProductAction($args)
     {   
+        
+        //verifica se a rota foi enviada com argumentos
+        if(!empty($args)){
+            $id = $args['id'];
+            $entry = filter_input(INPUT_POST, 'entry',FILTER_SANITIZE_NUMBER_INT);
+            $qty = filter_input(INPUT_POST, 'qty', FILTER_SANITIZE_NUMBER_INT);
+
+            if($entry > 0){
+                $res = ProductHandler::productQtyEntry($id, $qty, $entry);
+                EntryHandler::addEntry($this->loggedUser->id, $id, $qty, $entry);
+
+                if($res){
+                    $_SESSION['msg'] = 'Entrada realizada com sucesso!';
+                    $this->redirect('/produto/entrada');
+                }
+                else{
+                   $_SESSION['flash'] = 'Um erro correu entre em contato com desenvolvedor:(';
+                   $this->redirect('/produto/entrada');   
+               }
+            }
+            else{
+                $_SESSION['flash'] = 'Quantidade da entrada têm de ser maior que 0';
+                $this->redirect('/produto/entrada');        
+            }
+        }
+
+        //se $args estiver vazio
         $productId = null;
 
         $search = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -131,64 +173,9 @@ class ProductController extends Controller {
             $_SESSION['flash'] = 'Produto não encontrado';
             $this->redirect('/produto/entrada');
         } 
+
     }
-
-     /**
-     * controla processo de entrada de produtos
-     * **/
-
-     public function entryProductP($args)
-    {
-        $flash = '';
-        $msg = '';
-        $product = null;
-
-        if(!empty($_SESSION['flash'])){
-             $flash = $_SESSION['flash'];
-             $_SESSION['flash'] = '';  
-         }
-         if (!empty($_SESSION['msg'])) {
-             $msg = $_SESSION['msg'];
-             $_SESSION['msg'] = '';   
-         }
-
-        $product = ProductHandler::searchProductById($args['id']);
-
-        $this->render('/products/entry', [
-                'loggedUser' => $this->loggedUser,
-                'page' => 'entrada',
-                'flash' => $flash,
-                'msg' => $msg,
-                'product' => $product
-            ]
-        ); 
-    }
-
-
-    public function entryProductActionP($args)
-    {
-        $id = $args['id'];
-        $entry = filter_input(INPUT_POST, 'entry',FILTER_SANITIZE_NUMBER_INT);
-        $qty = filter_input(INPUT_POST, 'qty', FILTER_SANITIZE_NUMBER_INT);
-
-        if($entry > 0){
-            $res = ProductHandler::productQtyEntry($id, $qty, $entry);
-            EntryHandler::addEntry($this->loggedUser->id, $id, $qty, $entry);
-
-            if($res){
-                $_SESSION['msg'] = 'Entrada realizada com sucesso!';
-                $this->redirect('/produto/entrada');
-            }
-            else{
-             $_SESSION['flash'] = 'Um erro correu entre em contato com desenvolvedor:(';
-             $this->redirect('/produto/entrada');   
-            }
-         }
-         else{
-            $_SESSION['flash'] = 'Quantidade da entrada têm de ser maior que 0';
-            $this->redirect('/produto/entrada');        
-        }
-        /*
+      /*
         verificaçao que não permite numeros negativos
         usada em volta dos outros ifs
         if($qty > -1){
@@ -196,16 +183,22 @@ class ProductController extends Controller {
         else{
            $_SESSION['flash'] = 'Dados não estão preenchidos corretamente';
            $this->redirect('/produto/entrada');   
-         }*/ 
-        
-    }
+       }*/ 
+
 
     /**
      * Controla processo de baixa em produtos
      * */
 
-     public function outputProduct()
-    {
+    /**
+     * renderiza pagina de saída de produtos
+     * se rota não receber argumentos
+     * se receber renderiza mesma pagina mas preenchida 
+     * com dados vindos do banco e dados
+     *@param array $args 
+     * **/
+     public function outputProduct($args = [])
+     {
         $flash = '';
         $msg = '';
 
@@ -217,9 +210,20 @@ class ProductController extends Controller {
              $msg = $_SESSION['msg'];
              $_SESSION['msg'] = '';   
          }
+        if(!empty($args)){
+            
+            $product = ProductHandler::searchProductById($args['id']);
 
-        $providers = ProviderHandler::allProviders();
+            $this->render('/products/output', [
+                'loggedUser' => $this->loggedUser,
+                'page' => 'saida',
+                'flash' => $flash,
+                'msg' => $msg,
+                'product' => $product
+            ]); 
+        }
 
+        //se $args nâo estiver vazio
         $this->render('/products/output', [
                 'loggedUser' => $this->loggedUser,
                 'page' => 'saida',
@@ -229,37 +233,43 @@ class ProductController extends Controller {
         ); 
     }
 
-     public function outputProductP($args)
-    {
-        $flash = '';
-        $msg = '';
-        $product = null;
-
-        if(!empty($_SESSION['flash'])){
-             $flash = $_SESSION['flash'];
-             $_SESSION['flash'] = '';  
-         }
-         if (!empty($_SESSION['msg'])) {
-             $msg = $_SESSION['msg'];
-             $_SESSION['msg'] = '';   
-         }
-
-        $product = ProductHandler::searchProductById($args['id']);
-
-        $this->render('/products/output', [
-                'loggedUser' => $this->loggedUser,
-                'page' => 'saida',
-                'flash' => $flash,
-                'msg' => $msg,
-                'product' => $product
-            ]
-        ); 
-    }
-
-    public function outputProductAction()
+    public function outputProductAction($args = [])
     {   
-        $productId = null;
+        if(!empty($args)){
+          
+          $id = $args['id'];
 
+            $output = filter_input(INPUT_POST, 'output',FILTER_SANITIZE_NUMBER_INT);
+            $qty = filter_input(INPUT_POST, 'qty', FILTER_SANITIZE_NUMBER_INT);
+
+            if($qty){
+                if($output){
+                    
+                    $res = ProductHandler::productQtyOutput($id, $qty, $output);
+                    OutputHandler::addOutput($this->loggedUser->id, $id, $qty, $output);
+
+                    if($res){
+                        $_SESSION['msg'] = 'Saída realizada com sucesso!';
+                        $this->redirect('/produto/saida');
+                    }
+                    else{
+                       $_SESSION['flash'] = 'Um erro correu entre em contato com desenvolvedor:(';
+                       $this->redirect('/produto/saida');   
+                   }
+               }
+               else{
+                    $_SESSION['flash'] = 'Saída Têm de ser maior que 0';
+                    $this->redirect('/produto/saida');        
+                }
+            }
+            else{
+               $_SESSION['flash'] = 'Quantidade Têm de ser maior que 0';
+               $this->redirect('/produto/saida');   
+           }  
+        }
+
+        //se $args estiver vazio
+        $productId = null;
         $search = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
         
         if($search){
@@ -273,37 +283,5 @@ class ProductController extends Controller {
             $_SESSION['flash'] = 'Produto não encontrado';
             $this->redirect('/produto/saida');
         } 
-    }
-    public function outputProductActionP($args)
-    {
-        $id = $args['id'];
-
-        $output = filter_input(INPUT_POST, 'output',FILTER_SANITIZE_NUMBER_INT);
-        $qty = filter_input(INPUT_POST, 'qty', FILTER_SANITIZE_NUMBER_INT);
-
-        if($qty){
-            if($output){
-                
-                $res = ProductHandler::productQtyOutput($id, $qty, $output);
-                OutputHandler::addOutput($this->loggedUser->id, $id, $qty, $output);
-
-                if($res){
-                    $_SESSION['msg'] = 'Saída realizada com sucesso!';
-                    $this->redirect('/produto/saida');
-                }
-                else{
-                   $_SESSION['flash'] = 'Um erro correu entre em contato com desenvolvedor:(';
-                   $this->redirect('/produto/saida');   
-               }
-           }
-           else{
-                $_SESSION['flash'] = 'Saída Têm de ser maior que 0';
-                $this->redirect('/produto/saida');        
-            }
-        }
-        else{
-           $_SESSION['flash'] = 'Quantidade Têm de ser maior que 0';
-           $this->redirect('/produto/saida');   
-       }   
     }
 }

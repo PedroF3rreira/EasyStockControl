@@ -41,11 +41,11 @@
         // Set chart options
         var options = {'title':'How Much Pizza I Ate Last Night',
         			'is3D':true,
-                       'width':400,
-                       'height':300};
+                       'width':250,
+                       'height':200};
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
     </script>
