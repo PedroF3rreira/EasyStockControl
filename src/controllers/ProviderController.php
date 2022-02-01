@@ -70,6 +70,10 @@ class ProviderController extends Controller {
                 $_SESSION['msg'] = 'Fornecedor cadastrado com sucesso!';
                 $this->redirect('/fornecedor/cadastro');
             }
+            else{
+                $_SESSION['flash'] = 'O cpf ou cnpj já está cadastrado verifique os dados!';
+                $this->redirect('/fornecedor/cadastro');
+            }
         }
         else{
             $_SESSION['flash'] = 'Falta preencher algum compo de no formulario';

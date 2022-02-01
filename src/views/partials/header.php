@@ -32,7 +32,7 @@
         
         data.addRows([
           ['entrada', 3,5],
-          ['entrada', 3,5],
+          ['entrada', 5,1],
           
           
           
