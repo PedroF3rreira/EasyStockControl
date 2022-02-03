@@ -63,6 +63,9 @@
 						<span class="material-icons-outlined">account_circle</span>
 						<p><?=$user->name;?></p>
 					</div>
+					<div class="menu-mobile">
+						<span class="material-icons-outlined">menu</span>
+					</div>
 				</div>
 			</div>
 		</header>

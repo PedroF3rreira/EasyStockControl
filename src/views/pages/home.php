@@ -67,5 +67,4 @@
 	</section>
 	<?php $render('aside',['page' => $page]); ?>
 </div>
-</body>
-</html>
+<?php $render('footer') ?>
