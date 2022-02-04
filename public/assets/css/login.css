@@ -31,7 +31,6 @@ main{
 	text-shadow: 0em 0.1em 0.1em #222;
 }
 .login-area {
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -43,7 +42,6 @@ main{
 	min-height: 300px;
 	background-color: rgba(255,255,255,0.8);
 	box-shadow: 0em 0em 0.3em #000;	
-	
 }
 
 .login-area .form-input{
@@ -85,4 +83,42 @@ main{
 }
 .login-area a:hover{
 	color: var(--color-blue);	
+}
+
+@media(min-width: 450px) and (max-width: 1000px){
+	main{
+		flex-direction: column;
+
+	}
+	.brand-area{
+		margin-bottom: 20px;
+	}
+	.brand-area p{
+		display: none;
+	}
+	.login-area{
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+}
+@media(max-width: 450px){
+	main{
+		flex-direction: column;
+
+	}
+	.brand-area{
+		margin-bottom: 20px;
+		padding: 20px;
+	}
+	.brand-area p{
+		display: none;
+	}
+	.login-area{
+		width: 100%;
+		
+	}
+	.login-form{
+		padding-left: 50px;
+		padding-right: 50px;
+	}
 }
