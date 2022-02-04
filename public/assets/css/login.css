@@ -108,7 +108,7 @@ main{
 	}
 	.brand-area{
 		margin-bottom: 20px;
-		padding: 20px;
+		padding: 40px;
 	}
 	.brand-area p{
 		display: none;
@@ -118,7 +118,11 @@ main{
 		
 	}
 	.login-form{
-		padding-left: 50px;
-		padding-right: 50px;
+		width: 100%;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	.login-area .form-input input{
+		width: 100%;
 	}
 }

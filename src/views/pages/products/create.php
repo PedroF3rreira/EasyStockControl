@@ -52,7 +52,7 @@
 
 			<label for="long_desc">Descrição Longa:</label>
 			<div class="form-control">
-				<textarea cols="50" rows="10" name="long_desc" id="long_desc"></textarea> 
+				<textarea cols="45" rows="10" name="long_desc" id="long_desc"></textarea> 
 			</div>
 			<div class="form-control">
 				<input type="submit" value="Cadastrar" class="botton">
