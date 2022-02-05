@@ -94,7 +94,7 @@ class ProductController extends Controller {
      * com dados vindos do banco e dados
      *@param array $args 
      * **/
-    public function entryProduct($args = [])
+    public function entryProduct($args = '')
     {
         $flash = '';
         $msg = '';
@@ -110,7 +110,7 @@ class ProductController extends Controller {
          }
 
          if(!empty($args)){
-            $product = ProductHandler::searchProductById($args['id']);
+            $product = ProductHandler::searchProduct($args['search']);
          }
 
          $this->render('/products/entry', [
@@ -190,7 +190,7 @@ class ProductController extends Controller {
      * com dados vindos do banco e dados
      *@param array $args 
      * **/
-     public function outputProduct($args = [])
+     public function outputProduct($args = '')
      {
         $flash = '';
         $msg = '';
@@ -205,7 +205,7 @@ class ProductController extends Controller {
              $_SESSION['msg'] = '';   
          }
         if(!empty($args)){
-            $product = ProductHandler::searchProductById($args['id']);
+            $product = ProductHandler::searchProduct($args['search']);
         }
 
         $this->render('/products/output', [
@@ -296,7 +296,7 @@ class ProductController extends Controller {
              $_SESSION['msg'] = '';   
          }
         if(!empty($args)){
-            $product = ProductHandler::searchProductById($args['id']);
+            $product = ProductHandler::searchProductById(intval($args['id']));
         }
         
         $providers = ProviderHandler::allProviders();
@@ -315,7 +315,7 @@ class ProductController extends Controller {
     {   
         if(!empty($args)){
           
-          $id = $args['id'];
+          $id = intval($args['id']);
 
             $smallDesc = filter_input(INPUT_POST, 'small_desc',FILTER_SANITIZE_SPECIAL_CHARS);
             $longDesc = filter_input(INPUT_POST, 'long_desc',FILTER_SANITIZE_SPECIAL_CHARS);

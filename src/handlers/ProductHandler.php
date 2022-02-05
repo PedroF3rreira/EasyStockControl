@@ -78,36 +78,72 @@ class ProductHandler
 	/**
 	 * pesquisa produto pelo id, se encontrado algum resultado retorna objeto Produto preenchido
 	 * senão encontrado retorna nulo
-	 * @param int $id
+	 * @param string $search
+	 * @return object
+	 * */
+	public static function searchProduct($search)
+	{
+		try {
+
+			if($search){
+				$data = Product::select()
+					->where('small_desc', 'like', $search.'%')
+					->orWhere('id', $search)
+				->one();
+
+				if($data){
+
+					$product = new Product();
+					$product->id = $data['id'];
+					$product->smallDesc = $data['small_desc'];
+					$product->longDesc = $data['long_desc'];
+					$product->price = $data['price'];
+					$product->qtyMin = $data['qty_min'];
+					$product->qty = $data['qty'];
+					$product->idProvider = $data['id_provider'];
+
+					return $product;
+				}
+			}
+			
+		} catch (PDOException $e) {
+			return false;
+		}
+	}
+	/**
+	 * pesquisa produto pelo id, se encontrado algum resultado retorna objeto Produto preenchido
+	 * senão encontrado retorna nulo
+	 * @param sint $id
 	 * @return object
 	 * */
 	public static function searchProductById($id)
 	{
 		try {
 
-			$product = null;
-
 			if($id){
 				$data = Product::select()
 				->where('id', $id)
 				->one();
-				$product = new Product();
-				$product->id = $data['id'];
-				$product->smallDesc = $data['small_desc'];
-				$product->longDesc = $data['long_desc'];
-				$product->price = $data['price'];
-				$product->qtyMin = $data['qty_min'];
-				$product->qty = $data['qty'];
-				$product->idProvider = $data['id_provider'];
-			}
 
-			return $product;
+				if($data){
+
+					$product = new Product();
+					$product->id = $data['id'];
+					$product->smallDesc = $data['small_desc'];
+					$product->longDesc = $data['long_desc'];
+					$product->price = $data['price'];
+					$product->qtyMin = $data['qty_min'];
+					$product->qty = $data['qty'];
+					$product->idProvider = $data['id_provider'];
+
+					return $product;
+				}
+			}
 			
 		} catch (PDOException $e) {
 			return false;
 		}
 	}
-
 	/**
 	 * soma valor de value com quantidade 
 	 * e atualiza quantidade na tabela products
