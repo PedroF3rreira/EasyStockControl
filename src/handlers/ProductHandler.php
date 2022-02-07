@@ -234,8 +234,7 @@ class ProductHandler
 					'small_desc' => 'DELETADO',
 					'long_desc' => 'DELETADO',
 					'price' => 0,
-					'qty_min' => 0,
-					'id_provider' => 1
+					'qty_min' => 0
 				])
 				->where('id', $id)
 			->execute();
