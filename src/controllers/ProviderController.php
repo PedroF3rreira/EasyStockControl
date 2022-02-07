@@ -35,7 +35,7 @@ class ProviderController extends Controller {
 
          $this->render("/providers/create",[
                 'loggedUser' => $this->loggedUser,
-                'page' => 'Fornecedores',
+                'page' => 'cadastro_fornecedor',
                 'flash' => $flash,
                 'msg' => $msg
          ]);

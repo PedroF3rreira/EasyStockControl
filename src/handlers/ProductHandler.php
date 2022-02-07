@@ -195,6 +195,15 @@ class ProductHandler
 		}
 	}
 
+	/**
+	 * Atualizar produto no banco de dados
+	 * @param int $id
+	 * @param string $smallDesc
+	 * @param string $longDesc
+	 * @param float $price
+	 * @param int $qtyMin
+	 * @param int $provider
+	 * **/
 	public static function setProduct($id, $smallDesc, $longDesc, $price, $qtyMin, $provider)
 	{
 		try {
@@ -211,6 +220,28 @@ class ProductHandler
 			->execute();
 			
 			return true;
+		} catch (PDOException $e) {
+			return false;
+		}
+	}
+
+	public static function deleteProduct($id)
+	{
+		try {
+
+			Product::update()
+				->set([
+					'small_desc' => 'DELETADO',
+					'long_desc' => 'DELETADO',
+					'price' => 0,
+					'qty_min' => 0,
+					'id_provider' => 1
+				])
+				->where('id', $id)
+			->execute();
+			
+			return true;
+
 		} catch (PDOException $e) {
 			return false;
 		}

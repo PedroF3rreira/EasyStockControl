@@ -92,9 +92,16 @@ class ProductController extends Controller {
      * se rota não receber argumentos
      * se receber renderiza mesma pagina mas preenchida 
      * com dados vindos do banco e dados
-     *@param array $args 
+     * @param string $args
+     * 
+     * ao acessar a rota /produto/entrada
+     * controller verifica se rota foi acessada com algum valor em args 
+     * se args estiver vazio (acessado via GET) renderiza a tela normalmente com parametro product vazio
+     * se não (acessado via POST submeteu o form de pesquisa) executa o handler searchProduct(value) que faz uma busca no banco de dados e retorna
+     * o produto pelo id ou small_desc
+     *  
      * **/
-    public function entryProduct($args = '')
+    public function entryProduct($args = [])
     {
         $flash = '';
         $msg = '';
@@ -110,7 +117,7 @@ class ProductController extends Controller {
          }
 
          if(!empty($args)){
-            $product = ProductHandler::searchProduct($args['search']);
+            $product = ProductHandler::searchProduct(trim($args['id']));
          }
 
          $this->render('/products/entry', [
@@ -122,10 +129,17 @@ class ProductController extends Controller {
         ]); 
     }
 
-    public function entryProductAction($args)
+    public function entryProductAction($args = [])
     {   
         
-        //verifica se a rota foi enviada com argumentos
+        /**
+         * verifica se a rota foi enviada com argumentos
+         * se args não estiver vazio pega o que vem em id de args recupera do formulário
+         * entry e qtd e chama o handler productQtyEntry e em seguida adiciona o registro com o 
+         * hendloer addEntry()
+         * 
+        **/
+
         if(!empty($args)){
             $id = $args['id'];
             $entry = filter_input(INPUT_POST, 'entry',FILTER_SANITIZE_NUMBER_INT);
@@ -150,7 +164,10 @@ class ProductController extends Controller {
             }
         }
 
-        //se $args estiver vazio
+        /**
+        *se $args estiver vazio pega valor do formulario de pesquisa
+        * e verifica se existe se existir redireciona para a rota /produto/entrada/{id}
+        **/
         $productId = null;
 
         $search = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -188,9 +205,9 @@ class ProductController extends Controller {
      * se rota não receber argumentos
      * se receber renderiza mesma pagina mas preenchida 
      * com dados vindos do banco e dados
-     *@param array $args 
+     * @param array $args 
      * **/
-     public function outputProduct($args = '')
+     public function outputProduct($args = [])
      {
         $flash = '';
         $msg = '';
@@ -205,7 +222,7 @@ class ProductController extends Controller {
              $_SESSION['msg'] = '';   
          }
         if(!empty($args)){
-            $product = ProductHandler::searchProduct($args['search']);
+            $product = ProductHandler::searchProduct($args['id']);
         }
 
         $this->render('/products/output', [
@@ -355,6 +372,78 @@ class ProductController extends Controller {
         else{
             $_SESSION['flash'] = 'Produto não encontrado';
             $this->redirect('/produto/alterar');
+        } 
+    }
+
+    /**
+     * função que deleta produtos do sistema
+     * 
+     * **/
+     public function deleteProduct($args = [])
+     {
+         $flash = '';
+        $msg = '';
+        $product = [];
+
+        if(!empty($_SESSION['flash'])){
+             $flash = $_SESSION['flash'];
+             $_SESSION['flash'] = '';  
+         }
+         if (!empty($_SESSION['msg'])) {
+             $msg = $_SESSION['msg'];
+             $_SESSION['msg'] = '';   
+         }
+        if(!empty($args)){
+            $product = ProductHandler::searchProduct(trim($args['id']));
+        }
+        
+        $this->render('/products/delete', [
+            'loggedUser' => $this->loggedUser,
+            'page' => 'excluir',
+            'flash' => $flash,
+            'msg' => $msg,
+            'product' => $product,
+        ]);  
+    }
+
+    public function deleteProductAction($args = [])
+    {   
+       if(!empty($args)){
+
+          $id = intval($args['id']);
+
+          if($id){
+            $res = ProductHandler::deleteProduct($id);
+
+                if($res){
+                    $_SESSION['msg'] = 'Produto altualizado com suscesso!';
+                    $this->redirect('/produto/excluir');
+                }
+                else{
+                    $_SESSION['flash'] = 'Ocorreu um erro';
+                    $this->redirect('/produto/excluir');
+                }
+            }
+            else{
+                $_SESSION['flash'] = 'Dados não preenchidos!';
+                $this->redirect('/produto/excluir');
+            }
+        }
+
+            //se $args estiver vazio
+        $productId = null;
+        $search = filter_input(INPUT_POST, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
+
+        if($search){
+            $productId = ProductHandler::productExists($search);
+        }
+
+        if($productId){
+            $this->redirect("/produto/excluir/$productId");
+        }
+        else{
+            $_SESSION['flash'] = 'Produto não encontrado';
+            $this->redirect('/produto/excluir');
         } 
     }
 }
