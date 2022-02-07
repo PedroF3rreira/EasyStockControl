@@ -7,7 +7,7 @@ Sistema têm um layout responsivo possibilitando o acesso em dispositivos moveis
 ###### layout web login
 ![web 1](https://github.com/PedroF3rreira/assets/blob/master/login_easystock.PNG)
 ###### layout web cadastro de produtos
-![web 2](https://github.com/PedroF3rreira/assets/blob/master/cadastro_easystock.PNG)
+![web 2](https://github.com/PedroF3rreira/assets/blob/master/cadastro_easystock2.PNG)
 
 ## Layout Mobile
 ###### layout mobile login e cadastro de produtos
