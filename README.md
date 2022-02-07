@@ -36,4 +36,4 @@ git clone git@github.com:PedroF3rreira/EasyStockControl.git
 
 ## Agradecimentos
 Agradeço primeiramente a Deus que me deu condições de está aprendendo cada dia mais a minha esposa que têm me apoiado nessa minha nova aventura em tenta se torna um desenvolvedor web
-e também a equipe o cursO B7WEB.
+e também a equipe o curso B7WEB.
