@@ -35,5 +35,5 @@ git clone git@github.com:PedroF3rreira/EasyStockControl.git
 3. Crie seu usuário na opção da tela de login cadastra-se
 
 ## Agradecimentos
-Agradeço primeiramente a Deus que me deu condições de está aprendendo cada dia mais a minha esposa que têm me apoiado nessa minha nova aventura em tenta se torna um desenvolvedor web
+Agradeço primeiramente a Deus que me deu condições de está aprendendo cada dia mais, a minha esposa que têm me apoiado nessa minha nova Jornada em busca de me tornar um desenvolvedor web
 e também a equipe o curso B7WEB.
