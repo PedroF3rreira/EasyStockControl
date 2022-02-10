@@ -117,7 +117,7 @@ class ProductController extends Controller {
          }
 
          if(!empty($args)){
-            $product = ProductHandler::searchProduct(trim($args['id']));
+            $product = ProductHandler::searchProductById(trim($args['id']));
          }
 
          $this->render('/products/entry', [
@@ -222,7 +222,7 @@ class ProductController extends Controller {
              $_SESSION['msg'] = '';   
          }
         if(!empty($args)){
-            $product = ProductHandler::searchProduct($args['id']);
+            $product = ProductHandler::searchProductById($args['id']);
         }
 
         $this->render('/products/output', [

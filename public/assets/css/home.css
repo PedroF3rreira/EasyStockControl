@@ -21,7 +21,25 @@
 	padding: 10px;
 }
 
+.ctrl-search{
+	display: flex;
+	justify-content: space-around;
+	border: 0;
 
+}
+.ctrl-search a{
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	font-size: 8px;
+	color: #333;
+}
+.ctrl-search a .material-icons-outlined{
+	font-size: 20px;
+}
+td a:hover{
+	color: rgba(45,177,253,1);
+}
 
 
 

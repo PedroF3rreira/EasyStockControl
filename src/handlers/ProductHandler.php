@@ -85,27 +85,35 @@ class ProductHandler
 	{
 		try {
 
+			$products = [];
+
 			if($search){
 				$data = Product::select()
-					->where('small_desc', 'like', $search.'%')
+					->where('small_desc', 'like', '%'.$search.'%')
 					->orWhere('id', $search)
-				->one();
+				->get();
 
 				if($data){
+					
+					foreach($data as $productItem){
+						
+						$product = new Product();
+						
+						$product->id = $productItem['id'];
+						$product->smallDesc = $productItem['small_desc'];
+						$product->longDesc = $productItem['long_desc'];
+						$product->price = $productItem['price'];
+						$product->qtyMin = $productItem['qty_min'];
+						$product->qty = $productItem['qty'];
+						$product->idProvider = $productItem['id_provider'];
 
-					$product = new Product();
-					$product->id = $data['id'];
-					$product->smallDesc = $data['small_desc'];
-					$product->longDesc = $data['long_desc'];
-					$product->price = $data['price'];
-					$product->qtyMin = $data['qty_min'];
-					$product->qty = $data['qty'];
-					$product->idProvider = $data['id_provider'];
-
-					return $product;
+						$products[] = $product;
+					}
 				}
 			}
 			
+			return $products;
+
 		} catch (PDOException $e) {
 			return false;
 		}

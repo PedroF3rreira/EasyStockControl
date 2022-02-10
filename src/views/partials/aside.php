@@ -27,6 +27,6 @@ inventory_2
 
 		<li class='<?=($page=='configuration'?'active':'') ?>'><a href="#"><span class="material-icons-outlined">manage_accounts</span>configuraçoes</a></li>
 
-		<li class='<?=($page=='logout'?'active':'') ?>'><a href="#"><span class="material-icons-outlined">logout</span>logout</a></li>
+		<li class='<?=($page=='logout'?'active':'') ?>'><a href="<?=$base;?>/sair"><span class="material-icons-outlined">logout</span>logout</a></li>
 	</ul>
 </aside>
