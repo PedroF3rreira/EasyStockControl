@@ -23,22 +23,29 @@
 
 .ctrl-search{
 	display: flex;
+	align-items: center;
 	justify-content: space-around;
 	border: 0;
+	height:	100%;
+
 
 }
 .ctrl-search a{
 	display: flex;
 	align-items: center;
 	text-decoration: none;
-	font-size: 8px;
+	font-size: 10px;
 	color: #333;
+	border: 1px solid rgba(0, 0, 255, .3);
+	border-radius: 5px;
+	padding: 3px;
 }
 .ctrl-search a .material-icons-outlined{
-	font-size: 20px;
+	font-size: 15px;
 }
 td a:hover{
-	color: rgba(45,177,253,1);
+	color: #fff;
+	background-color: rgba(45,177,253,1);
 }
 
 

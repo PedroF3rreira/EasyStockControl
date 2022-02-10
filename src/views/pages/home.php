@@ -25,7 +25,7 @@
 					<th>Descrição</th>
 					<th>Qtd</th>
 					<th>Preço</th>
-					<th>Contole</th>
+					<th>Controle</th>
 					
 					
 				</tr>
@@ -127,14 +127,7 @@
 
 	<section class="content-area2">
 
-		<div class="section-title">
-			<h4>Relatório de Estoque</h4>
-		</div>
-		<div  class="graphics-area">
-			<div id="chart_div">
-					
-			</div>
-		</div>
+		
 	</section>
 	<?php $render('aside',['page' => $page]); ?>
 </div>
