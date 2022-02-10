@@ -26,8 +26,6 @@
 					<th>Qtd</th>
 					<th>Preço</th>
 					<th>Controle</th>
-					
-					
 				</tr>
 				<tbody>
 					<?php foreach($products as $product): ?>
@@ -52,29 +50,6 @@
 				</tbody>
 			</table>
 		</form>
-
-		<section class="search">
-			
-			<table>
-				<tr>
-					<th>Descrição</th>
-					<th>Saldo anterior</th>
-					<th>Qtd da Entrada</th>
-					<th>Data da Entrada</th>
-				</tr>
-				<tbody>
-					<?php foreach($entries as $entry): ?>
-						<tr>
-							<td><?=substr($entry->product->smallDesc, 0, 28).'...';?></td>
-							<td><?=$entry->qty;?></td>
-							<td><?=$entry->entry;?></td>
-							<td><?=date_format(date_create($entry->dateEntry), 'd-m-Y')?></td>
-						</tr>
-					<?php endforeach;?>
-				</tbody>
-			</table>
-		</section>
-		
 		<div class="section-title">
 			<h4>Últimas Entradas</h4>
 		</div>
