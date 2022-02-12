@@ -24,16 +24,6 @@ Sistema têm um layout responsivo possibilitando o acesso em dispositivos moveis
 ###### Banco Dados
 - MYSQL
 
-## Como Executar o Projeto
-para executar este projeto em é presciso um servidor tipo xampp ou similar.
-1. Clone o repositório do projeto para pasta publica de seu projeto
-```
-git clone git@github.com:PedroF3rreira/EasyStockControl.git
-```
-2. Importe as tabelas para seu banco de dados que já estão no repositório
-
-3. Crie seu usuário na opção da tela de login cadastra-se
-
 ## Agradecimentos
 Agradeço primeiramente a Deus que me deu condições de está aprendendo cada dia mais, a minha esposa que têm me apoiado nessa minha nova Jornada em busca de me tornar um desenvolvedor web
 e também a equipe o curso B7WEB. 👍
