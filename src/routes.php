@@ -38,3 +38,4 @@ $router->post('/produto/excluir', 'ProductController@deleteProductAction');
 
 $router->get('/fornecedor/cadastro', 'ProviderController@newProvider');
 $router->post('/fornecedor/cadastro', 'ProviderController@newProviderAction');
+$router->get('/fornecedor/atualizar', 'ProviderController@updateProvider');

@@ -80,5 +80,42 @@ class ProviderController extends Controller {
             $this->redirect('/fornecedor/cadastro');
         }
     
-    }   
+    }
+
+    public function updateProvider()
+    {
+        $flash = '';
+        $msg = '';
+        
+        $providers = [];
+
+        if(!empty($_SESSION['flash'])){
+             $flash = $_SESSION['flash'];
+             $_SESSION['flash'] = '';  
+         }
+         if (!empty($_SESSION['msg'])) {
+             $msg = $_SESSION['msg'];
+             $_SESSION['msg'] = '';   
+         }
+
+         $search = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
+
+         if($search){
+            $providers = ProviderHandler::getProviders($search);
+            
+            if(empty($providers)){
+                $_SESSION['flash'] = 'Não foi encrontrado um fornecedor';
+                $this->redirect('/fornecedor/atualizar');
+            }
+         }
+         $this->render("/providers/update",[
+                'loggedUser' => $this->loggedUser,
+                'page' => 'atualizar_fornecedor',
+                'flash' => $flash,
+                'msg' => $msg,
+                'providers' => $providers
+         ]);      
+    }
+
+   
 }

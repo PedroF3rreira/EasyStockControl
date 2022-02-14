@@ -111,12 +111,12 @@ class ProductHandler
 					}
 				}
 			}
-			
-			return $products;
 
 		} catch (PDOException $e) {
 			return false;
 		}
+
+		return $products;
 	}
 	/**
 	 * pesquisa produto pelo id, se encontrado algum resultado retorna objeto Produto preenchido

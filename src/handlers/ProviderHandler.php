@@ -63,4 +63,35 @@ class ProviderHandler
 			return false;
 		}
 	}
+
+	public function getProviders($search)
+	{
+		try {
+
+			$providers = [];
+
+			$data = Provider::select()
+				->where('name', 'like', "%$search%")
+			->get();
+
+			foreach($data as $item){
+				$provider = new Provider();
+				$provider->id = $item['id'];
+				$provider->name = $item['name'];
+				$provider->email = $item['email'];
+				$provider->cnpj = $item['cnpj'];
+				$provider->cpf = $item['cpf'];
+				$provider->address = $item['address'];
+				$provider->phone = $item['phone'];
+				$provider->email = $item['email'];
+
+				$providers[] = $provider;
+			}
+			
+		} catch (PDOException $e) {
+			return false;
+		}
+
+		return $providers;
+	}
 }
